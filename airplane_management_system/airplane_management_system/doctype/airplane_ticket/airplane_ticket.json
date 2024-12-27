@@ -1,0 +1,275 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: {flight}-{source_airport_code}-to-{destination_airport_code}-{###}",
+ "creation": "2024-06-20 01:02:24.415754",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "booking_ticket_id_section",
+  "booking_id",
+  "passenger_details_section",
+  "column_break_xmgr",
+  "flight",
+  "flight_class",
+  "flight_price",
+  "column_break_fjfc",
+  "status",
+  "max_seat_capacity",
+  "seat_available",
+  "airport_details_section",
+  "source_airport_code",
+  "column_break_hvxm",
+  "destination_airport_code",
+  "departure_details_section",
+  "departure_time",
+  "departure_date",
+  "column_break_nwpo",
+  "duration_of_flight",
+  "gate_number",
+  "passenger_information_section",
+  "flight_passenger",
+  "add_on_flight_section",
+  "add_ons",
+  "total_purchase_section",
+  "total_amount",
+  "amended_information_section",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Airplane Ticket",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "flight.source_airport_code",
+   "fieldname": "source_airport_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Source Airport Code",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "flight.destination_airport_code",
+   "fieldname": "destination_airport_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Destination Airport Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "flight",
+   "fieldtype": "Link",
+   "label": "Flight",
+   "options": "Airplane Flight",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "flight.date_of_departure",
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "flight.time_of_departure",
+   "fieldname": "departure_time",
+   "fieldtype": "Time",
+   "label": "Departure Time",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "flight.duration",
+   "fieldname": "duration_of_flight",
+   "fieldtype": "Duration",
+   "label": "Duration Of Flight",
+   "read_only": 1
+  },
+  {
+   "depends_on": "flight",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Booked\nChecked-In\nBoarded"
+  },
+  {
+   "fetch_from": "flight.flight_price",
+   "fieldname": "flight_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Flight Price",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Total amount",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xmgr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "passenger_details_section",
+   "fieldtype": "Section Break",
+   "label": "Flight Details"
+  },
+  {
+   "depends_on": "flight",
+   "fieldname": "airport_details_section",
+   "fieldtype": "Section Break",
+   "label": "Airport Details"
+  },
+  {
+   "fieldname": "column_break_hvxm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "flight",
+   "fieldname": "departure_details_section",
+   "fieldtype": "Section Break",
+   "label": "Departure Details"
+  },
+  {
+   "fieldname": "column_break_nwpo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "add_on_flight_section",
+   "fieldtype": "Section Break",
+   "label": "Add On Flight"
+  },
+  {
+   "fieldname": "add_ons",
+   "fieldtype": "Table",
+   "label": "Add Ons",
+   "options": "Airplane Ticket Add-on Item"
+  },
+  {
+   "fetch_from": "flight.gate_number",
+   "fieldname": "gate_number",
+   "fieldtype": "Data",
+   "label": "Gate Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "passenger_information_section",
+   "fieldtype": "Section Break",
+   "label": "Passenger Information"
+  },
+  {
+   "fieldname": "booking_ticket_id_section",
+   "fieldtype": "Section Break",
+   "label": "Booking ID"
+  },
+  {
+   "fieldname": "flight_passenger",
+   "fieldtype": "Table",
+   "label": "Flight Passenger",
+   "options": "Flight Passenger",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_information_section",
+   "fieldtype": "Section Break",
+   "label": "Amended Information"
+  },
+  {
+   "fetch_from": "flight.flight_class",
+   "fieldname": "flight_class",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Flight Class",
+   "options": "Airplane Flight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_fjfc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "depends_on": "flight",
+   "fieldname": "seat_available",
+   "fieldtype": "Int",
+   "is_virtual": 1,
+   "label": "Avaliable Seat Remaining"
+  },
+  {
+   "depends_on": "flight",
+   "fieldname": "total_purchase_section",
+   "fieldtype": "Section Break",
+   "label": "Total Purchase"
+  },
+  {
+   "depends_on": "flight",
+   "fetch_from": "flight.capacity_seat",
+   "fieldname": "max_seat_capacity",
+   "fieldtype": "Int",
+   "label": "Max Seat Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "booking_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Booking ID",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-01 12:34:44.141650",
+ "modified_by": "Administrator",
+ "module": "Airplane Management System",
+ "name": "Airplane Ticket",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Gray",
+   "title": "Booked"
+  },
+  {
+   "color": "Purple",
+   "title": "Checked-In"
+  },
+  {
+   "color": "Green",
+   "title": "Boarded"
+  }
+ ],
+ "track_changes": 1
+}

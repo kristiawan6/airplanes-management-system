@@ -1,0 +1,115 @@
+Project Airplane_Management_System {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Airplane Management System Database
+    
+    This is a database schema for an airplane management system application.
+    
+    ## Tables
+    
+    - `Airline`: Contains information about airlines.
+    - `Airport`: Stores details about airports.
+    - `Airplane`: Records details about airplanes operated by airlines.
+    - `AirplaneFlight`: Represents flights operated by airplanes.
+    - `FlightPassenger`: Stores passenger details for each flight.
+    - `AirplaneTicket`: Represents tickets booked by passengers.
+    - `AirplaneTicketAddOnType`: Tracks additional services booked along with tickets.
+  '''
+}
+
+Table Airline {
+  Name varchar [pk, not null]
+  FoundingYear int [not null, note: 'Non-negative']
+  CustomerCareNumber varchar [not null]
+  Headquarters varchar [not null]
+  Website varchar
+}
+
+Table Airport {
+  Name varchar [pk, not null]
+  Code varchar [not null, unique]
+  City varchar
+  Country varchar
+}
+
+Table Airplane {
+  Name varchar [pk, not null]
+  Image varchar [not null]
+  Model varchar [not null]
+  AirlineName varchar [not null]
+  CapacitySeat int [not null]
+  CapacityLuggage int [not null]
+}
+
+Table AirplaneFlight {
+  Name varchar [pk, not null]
+  AirplaneName varchar [not null]
+  SourceAirport varchar [not null]
+  SourceAirportCode varchar 
+  DestinationAirport varchar [not null]
+  DestinationAirportCode varchar
+  DateOfDeparture date [not null]
+  TimeOfDeparture time [not null]
+  GateNumber varchar [not null]
+  Duration interval [not null]
+  FlightPrice decimal [not null]
+  CapacitySeat int [not null]
+  Capacityluggage int [not null]
+  MaxLuggageCapacity int [not null]
+  Status varchar [default: 'Scheduled']
+  AmmendedFrom varchar
+  IsPublished bool
+}
+
+Table AirplaneTicket {
+  Name varchar [pk, increment]
+  BookingID varchar 
+  FlightName varchar [not null]
+  FlightClass varchar
+  FlightPassenger table [not null]
+  MaxCapacitySeat int 
+  AvailableSeatRemaining int 
+  Seat varchar
+  AddOnItem varchar [not null]
+  DateOfDeparture date [not null]
+  TimeOfDeparture time [not null]
+  Duration interval [not null]
+  SourceAirportCode varchar [not null]
+  DestinationAirportCode varchar [not null]
+  GateNumber varchar
+  AddOns table
+  FlightPrice decimal 
+  TotalAmount decimal [not null]
+  Status varchar [default: 'Booked']
+  AmmendedFrom varchar 
+}
+
+Table AirplaneTicketAddOnType {
+  Name varchar [pk, not null]
+  Description varchar
+  Price decimal [not null]
+}
+
+Table AirplaneTicketAddOnItem {
+  AddOnTypeName varchar [not null]
+  Amount decimal [not null]
+  Quantity int [not null]
+}
+
+Table FlightPassenger {
+  FullName varchar [pk,not null]
+  FirstName varchar [not null]
+  LastName varchar
+  DateOfBirth int [not null]
+  SeatNumber int [not null]
+  TicketID varchar
+}
+
+Ref: Airline.Name > Airplane.AirlineName
+Ref: AirplaneFlight.AirplaneName > Airplane.Name
+Ref: AirplaneFlight.SourceAirportCode > Airport.Code
+Ref: AirplaneFlight.DestinationAirportCode > Airport.Code
+Ref: AirplaneTicket.FlightName > AirplaneFlight.Name
+Ref: AirplaneTicketAddOnItem.AddOnTypeName > AirplaneTicket.AddOns
+Ref: AirplaneTicketAddOnItem.AddOnTypeName > AirplaneTicketAddOnType.Name
+Ref: AirplaneTicket.FlightPassenger > FlightPassenger.FullName

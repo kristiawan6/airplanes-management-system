@@ -1,0 +1,22 @@
+{
+ "creation": "2024-06-27 14:53:20.721271",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "filters_json": "{}",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "Add-on Sold",
+ "modified": "2024-06-27 14:53:20.758821",
+ "modified_by": "Administrator",
+ "module": "Airplane Management System",
+ "name": "Add-on Sold",
+ "owner": "Administrator",
+ "report_field": "Sold Count",
+ "report_function": "Sum",
+ "report_name": "Add-on Popularity",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Report"
+}

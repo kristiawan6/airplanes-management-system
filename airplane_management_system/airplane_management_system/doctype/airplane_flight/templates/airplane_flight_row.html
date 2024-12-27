@@ -1,0 +1,149 @@
+<body>
+	<div class="flex items-start gap-4">
+		<div class="border rounded-xl bg-white p-4 w-4/5 mb-4 pb-4">
+			<div class="grid grid-cols-5 gap-4">
+				<div class="flex flex-col">
+					<div class="text-2xl font-semibold">{% set docairplane = frappe.get_doc('Airplane',doc.airplane) %}
+						{{docairplane.airline}}</div>
+					<img src="https://img.freepik.com/premium-vector/airplane-icon-flat-transportation-plane-symbol-sign-air-fly-isolated-white-background_89223-500.jpg?w=360"
+						class="h-[170px] w-[170px]" />
+				</div>
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center gap-4 text-xl font-semibold text-blue-500">
+						<i class="fa-solid fa-plane-departure"></i>
+						<div>From:</div>
+					</div>
+					<div class="text-lg font-bold">{{doc.source_airport}}</div>
+					<div class="text-base font-semibold">{{doc.source_airport_code}}</div>
+				</div>
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center gap-4 text-xl font-semibold text-blue-500">
+						<i class="fa-solid fa-plane-arrival"></i>
+						<div>To:</div>
+					</div>
+					<div class="text-lg font-bold">{{doc.destination_airport}}</div>
+					<div class="text-base font-semibold">{{doc.destination_airport_code}}</div>
+				</div>
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center gap-4 text-xl font-semibold text-blue-500">
+						<i class="fa-regular fa-calendar"></i>
+						<div>Time:</div>
+					</div>
+					<div class="text-lg font-bold">{{frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }}
+					</div>
+					<div class="text-lg font-bold">{{doc.time_of_departure}}</div>
+					<div class="text-base font-semibold">{{frappe.utils.format_duration(doc.duration)}}</div>
+				</div>
+				<div class="flex flex-col gap-4">
+					<div class="text-base font-semibold">Rp. <span class="text-4xl font-bold">750.000</span><span
+							class="text-base font-semibold">/pax</span></div>
+					<button onclick="window.location.href=`{{doc.route}}`"
+						class="bg-lime-500 px-2 py-2 rounded-xl text-white font-semibold">
+						View Details 1
+					</button>
+					<!-- Button trigger modal -->
+					<button type="button" class="bg-lime-500 px-4 py-2 rounded-xl text-white font-semibold"
+						data-toggle="modal" data-target="#exampleModal">
+						View Details 2
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Penerbangan dari Kota Asal ke Kota
+										Tujuan</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="space-y-4 w-full">
+										<div class="flex items-center gap-4 w-full">
+											<svg width="36" height="150" viewBox="0 0 28 116" fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+												<circle cx="14" cy="6.5" r="6" transform="rotate(90 14 6.5)"
+													stroke="#3E7BFA" />
+												<line x1="14.5" y1="17" x2="14.5" y2="99" stroke="#C2C2C2"
+													stroke-dasharray="3 3" />
+												<circle cx="14" cy="109.5" r="6" transform="rotate(90 14 109.5)"
+													fill="#3E7BFA" stroke="#3E7BFA" />
+											</svg>
+											<div class="space-y-1 w-full">
+												<div class="text-sm font-bold">
+													{{frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY")
+													}} - {{doc.time_of_departure}}</div>
+												<div class="text-xs text-slate-500 font-semibold">{{doc.source_airport}}
+													-
+													{{doc.source_airport_code}}</div>
+												<div class="border rounded-xl bg-white p-2 flex items-center gap-2">
+													<img src="https://img.freepik.com/premium-vector/airplane-icon-flat-transportation-plane-symbol-sign-air-fly-isolated-white-background_89223-500.jpg?w=360"
+														class="h-[50px] w-[50px]" />
+													<div class="space-y-1">
+														<div class="text-sm font-bold">{% set docairplane =
+															frappe.get_doc('Airplane',doc.airplane) %}
+															{{docairplane.airline}}</div>
+														<div class="flex items-center gap-2 text-xs font-semibold">
+															<div>QA-0001</div>
+															<div>Ekonomi</div>
+															<div>{{frappe.utils.format_duration(doc.duration)}}</div>
+														</div>
+													</div>
+												</div>
+												<div class="text-sm font-bold">
+													{{frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY")
+													}} - {{doc.time_of_departure}}</div>
+												<div class="text-xs text-slate-500 font-semibold">
+													{{doc.destination_airport}}
+													-
+													{{doc.destination_airport_code}}</div>
+											</div>
+										</div>
+										<div class="space-y-4">
+											<h5 class="font-semibold">Fasilitas Penerbangan</h5>
+											<div class="flex items-center gap-4">
+												<i class="fa-solid fa-suitcase-rolling text-xl text-blue-500"></i>
+												<div class="space-y-1">
+													<div class="text-sm font-bold">Kabin dan Bagasi</div>
+													<div class="text-xs font-semibold text-slate-500">Maksimal kabin 7
+														kg dan Bagasi 20 kg. Anda
+														dapat melakukan
+														pembelian bagasi tambahan tersedia di halaman pemesanan.</div>
+												</div>
+											</div>
+											<div class="flex items-center gap-4">
+												<i class="fa-solid fa-utensils text-xl text-blue-500"></i>
+												<div class="space-y-1">
+													<div class="text-sm font-bold">Gratis Makan</div>
+													<div class="text-xs font-semibold text-slate-500">Sudah termasuk
+														gratis makan. Pembelian makanan tambahan tidak tersedia di
+														halaman pemesanan.</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<div class="space-y-1 text-xl font-semibold">
+										<div class="text-black">Harga</div>
+										<div class="text-lime-700">Rp. 750.000<span class="text-black">/pax</span></div>
+									</div>
+									<button type="button"
+										class="bg-blue-500 px-4 py-2 rounded-xl text-lg text-white font-semibold">Book
+										Now</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://kit.fontawesome.com/d507fe1e83.js" crossorigin="anonymous"></script>
+</body>
+
+
+<!-- this is a sample default list template -->

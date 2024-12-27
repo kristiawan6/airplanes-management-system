@@ -1,0 +1,16 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<h3>{{ title }}</h3>
+
+<h4> Flight Details</h4>
+<ul style="color: #999;font-size: 14px;">
+    <li>{% set docairplane = frappe.get_doc('Airplane',doc.airplane) %}
+        Airline: {{docairplane.airline}}  </li>
+    <li>{{doc.source_airport_code}} -> {{doc.destination_airport_code}}</li>
+    <li>{{frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }} |  {{doc.time_of_departure}} </li>
+    <li>Duration: {{frappe.utils.format_duration(doc.duration)}}</li>
+  </ul>  
+  <a href="/book-flight-ticket/new" class="btn btn-primary" style="box-sizing: border-box;height: 40px;padding-left: 12px;padding-right: 12px;padding-top: 8px; font-size: 14px;font-weight: 600;background-color: #0f6bff;border-radius: 8px;">Book Flight
+  </a>
+{% endblock %}

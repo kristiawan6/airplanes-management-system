@@ -1,0 +1,25 @@
+{
+ "cards": [
+  {
+   "card": "Add-on Sold"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Revenue By Airline",
+   "width": "Full"
+  }
+ ],
+ "creation": "2024-06-27 14:39:39.246860",
+ "dashboard_name": "Report",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2024-06-27 14:55:26.707880",
+ "modified_by": "Administrator",
+ "module": "Airplane Management System",
+ "name": "Report",
+ "owner": "Administrator"
+}
